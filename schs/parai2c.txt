@@ -1,0 +1,187 @@
+/// PARALLEL PORT -> I2C BUS CONVERTER - DESIGNED BY KOCHISE 2000 ////////////
+
+FILES      : - PARAI2CH.PNG -> Hollow layers
+             - PARAI2CT.PNG -> Top layer of the card
+             - PARAI2CU.PNG -> Under layer of the card
+
+             - PARAI2C.PCB  -> PCB Layout file
+                               (above pictures are issued from this file)
+
+RESOLUTION : 600 dpi 
+             (600 dpi printed, you'll get the exact size)
+
+MIRRORING  : Valid 
+             (put ink face against copper to avoid UV diffraction)
+
+BOM        : 1 * DB 25 male connector
+             1 * capacitor 10uF
+             2 * resistor 1k OHM
+             4 * resistor 10k OHM
+             1 * IC 74xx05
+             2 * connector pins for power
+             1 * 5*2 male connector for I2C bus report
+
+SPECIAL    : TOP LAYER is not necessary !
+
+CONNECTOR  :        VCC  1 oo 2  GND
+             LED 1 / SCL 3 oo 4  GND
+                    VCC  5 oo 6  GND
+             LED 2 / SDA 7 oo 8  GND
+                    VCC  9 oo 10 GND
+
+DATA       :        |  7   6   5   4   3   2   1   0   
+             -------+---------------------------------
+               READ |         SCL SDA             PWR
+             -------+---------------------------------
+              WRITE |                     SCL SDA PWR
+                                           *   *
+             * WSCL and WSDA are LOW LEVEL ACTIVE
+               (write '0' to put '1' on the I2C BUS)
+
+INFO       : 
+
+I. Utilisation d'Orcad / Etapes de creation d'un circuit
+
+I.A. Saisie d'un schema structurel (Capture)
+
+Apres avoir lance Capture et avoir choisit de creer un nouveau circuit (File/New), il faut choisir un assistant, puis choisir les biblotheques de composants qui nous seront utiles. Il est sage de ne pas toutes les choisirs pour ne pas alourdir le traitement.
+Une fenetre s'ouvre, avec une page de saisie vierge. C'est dans celle-ci que sera saisie le schema structurel du circuit.
+La selection des outils s'effectue grace a la barre verticale d'icones sur la droite. Pour les composants, choisir le desin representant une porte logique. Pour les lignes de potentiel, choisir le crayon. Des annotations pourront etres apportees au schema grace a l'icone T.
+Lorsque l'on choisit de placer un composant, toutes les bibliotheques sont selectionnees. On peut donc entrer les references du composant pour une recherche assez rapide. Cependant il arrive souvent que les references doivent etres tres precises, et ou un 7405 ne donnera pas de resultats, il faudra essayer 74F05 (donner une declinaison de rapidite du circuit). La recherche ne peut etre faites avec une nomenclature 'generique' des composants. Il faut savoir PRECISEMENT ce que l'on cherche, ce qui n'est pas forcement evident des la conception du circuit.
+Placer ensuite le composant en prenant soin de creer sur le schema des blocs structurels, suivants les etages (voir schema de l'amplificateur). La regle est de mettre l'entree a gauche et la sortie a droite. L'alimentation sera mise dans le coin superieur droit, et le decouplage des differents ICs dans le coin superieur gauche.
+Apres chaque action, il faut preciser que l'on veut en faire une autre. Pour cela, appuyer sur le bouton droit de la souris, et selectionner End Command. Le raccourcit de cette fonction est la touche [Echap].
+Tracer ensuite les lignes de potentiels en prenant un soin particulier a n'en croiser AUCUNES. La feuille de schema etant assez vaste, ne pas hesiter a ecarter les composants, aerer le schema fonctionnel, pour une meilleure lisibilite.
+A ce stade, les composants ne disposent pas encore de numerotation, ou alors celle-ci est fantaisiste, suivant l'ordre de placement des differents composants. Cette annotation n'est pas pratique pour la realisation du circuit.
+
+I.B. Annoter automatiquement (U)
+
+Cette option se trouve dans la barre horizontale au-dessus de la fenetre de saisie du schema structurelle.
+Grace a cette option, l'annotation va s'automatiser en fonction du type du composant et sa position sur le schema. Cette position est tout a fait arbitraire, mais nous permettra une meilleure lisibilite lors du routage. En effet, un condensateur note C1 ne sera pas un condensateur place n'importe ou sur le schema, ce sera celui place le premier en haut a gauche (si l'on a choisit l'annotation dans le sens Gauche-Droite/Haut-Bas).
+Cependant cette annotation est arbitraire car il faudra effectuer une annotation 'inverse' ulterieurement, basee sur le meme principe, mais a partir du circuit route cette fois, dans le but de faciliter le reperage des composants pour le Service Apres-Vente (SAV).
+
+I.C. Verification du circuit (DRC, Design Rules Check)
+
+Cette option se situe a cote de la precedente, dans la barre horizontale au-dessus de la fenetre de saisie du schema structurelle.
+Cette fonction va verifier s'il n'y a pas d'erreur electrique mineures, voire majeures (court-circuits). Cette verification s'effectue suivant une 'strategie' dans une matrice, en selectionnant G (Good), B (Bad), W (Warn). Cette strategie de verification est en principe deja utilisable pour une utilisation rapide de la fonction.
+
+I.D. Edition d'une NetList
+
+Le fichier du schema ne sera pas utilise par le logiciel de routage. En effet, il n'utilisera pas les annotations, les positions des representations des composants. Faire une NetList, c'est faire une liste des composants et les connexions de leurs pattes.
+
+I.E. Creation d'un circuit vierge (Layout Plus)
+
+Apres avoir saisie le schema, il faut a present passer a la phase de realisation du circuit, et placer les composants. Cette phase sera realisee grace au module Layout Plus d'Orcad 9.01.
+
+I.E.1. New -> charger NetList .MNL
+
+Au chargement du fichier NetList, le module Layout Plus ne connait pas les 'empreintes', les boitiers, que l'on veut affecter aux differents composants choisis dans le schema structurel. Il va donc nous demander, pour chaque composant, une empreinte a choisir dans une liste qui resemble a celle qui nous permettait de choisir nos composants a placer sur le schema structurel dans le module Capture.
+Cette phase peut etre particulirement longue si l'on a beaucoup de composants, mais elle peut etre effectuee ulterieurement. Cependant il faudra choisir les composants independament, ce qui n'est pas rapide et demande beaucoup de manipulations.
+
+I.E.2. Configurer
+
+Il sagit de preciser le pas de la grille et differents autres parametres qui nous seront utiles. Cela depend de l'utilisateur.
+
+I.E.3. Tools/obstacle/new -> BoardOutline
+
+Grace a cette fonction, on va pouvoir 'dessiner' le contour de notre carte. On peut vraiment presque tout faire, meme des excroissances circulaires ou des cavites.
+
+I.E.4. Placement des composants
+
+Au depart, tous les composants sont places alignes en fonction de leurs types. Il sagit de les placer le plus judicieusement possible, en respectant les regles de placement vues pour le schema structurel, c'est a dire entree d'un cote, sortie de l'autre, et alimentation du cote de la sortie.
+Les condensateurs de decouplage (annulation de l'effet inductif des pistes de circuit imprime) seront a placer le plus pres possible des circuits integres a decoupler et du bornier d'alimentation.
+Il faudra aussi veiller particulierement a ne pas 'dessiner' de boucles qui pourront se comporter en autant d'antennes. Les normes de CEM (Compatibilite Electro-Magnetique) etant assez strictes, il ne sagit pas que notre circuit perturbe le fonctionnement d'un autre par une emission d'ondes indesirables trop importante.
+
+I.E.5. Reconnect mode (connections les plus proches)
+
+Cette fonction est particulierement interessante, car elle connecte les pattes d'un meme potentiel les plus proches. Il ne faut pas abuser de cette fonction, car une fois selectionnee, le trace des lignes de potentiel (jaune) disparait. Le mieux est de le selectionner pour reconnecter les pattes, puis de le deselctionner ensuite pour pouvoir agir sur les composants.
+
+I.E.6. online DRC (a enlever)
+
+Cette fonction est a bannir, a deselectionner d'emblee. Elle ne permet pas de tracer ou de router en dehors d'un rectangle defini a l'ecran. C'est une fonction tres frustrante a l'utilisation car elle restreint beaucoup l'ergonomie du progiciel.
+
+I.F. Routage manuel des pistes
+
+A present, il sagit de router PHYSIQUEMENT les pistes du circuit imprime. Pour l'instant, seules des lignes de potentiel sont representees, il va donc falloir 'dessiner' le dessin des pistes qui se calera sur les lignes de potentiel.
+
+I.F.1. Add/Edit rout mode
+
+A partir d'une connection, d'une patte de composant, permet de tracer une piste. On peut selectionner sa largeur dans ses proprietes (clic droit/Proprieties).
+
+I.F.2. Edit segment mode
+
+Cette fonction permet de corriger le placement d'une portion de piste. Tres pratique, elle permettra en outre de faire des coins a 45ø (evite l'accumulation des charges dans le coude d'une piste, voire le saut d'electron d'une piste a l'autre lorsqu'elle sont adjacentes).
+
+I.F.3. DRC
+
+I.G. Creation d'un plan de masse
+
+A l'image de la creation du contour du circuit imprime, il faut aller dans le menu Tool/Obstacle/New -> Copper Pour afin de pouvoir tracer le contour du plan de masse. Le plan de masse joue un peu le r“le d'un blindage sur une face du circuit imprime en empechant la propagation des OEM (Ondes Electro-Magnetiques). C'est base sur le principe de la cage de Faraday, a condition que le perimetre des mailles de la cage soit inferieure a la longueur d'onde. Ici, il n'y a donc aucun problemes.
+
+I.H. Verification des eventuels court-circuits
+
+Comme pour le schema structurel, il faut faire verifier le circuit pour reperer les eventuels court-circuit (pistes se touchant). Modifier en consequence.
+
+I.I. Annotation
+
+C'est la derniere etape d'annotation. Elle s'effectuera d'apres le meme principe que pour le schema structurel, suivant un sens definit par l'utilisateur. Mais l'annatation correspondra ici a la position des composants reels, et non pas leurs representations.
+
+I.J. Impression du typon
+
+Dans le menu Post Process, choisir le Layer a imprimer et editer ses proprietes (clic droit/Edit Proprieties). Selectionner l'impression sur imprimante, forcee en noir et blanc, ne pas boucher les trous des pastilles. Pour le facteur d'agrandissement, il y a deux cases. C'est dans la premiere qu'il faut mettre le nombre de fois que l'on veut agrandir le circuit.
+Une fois cela effectue, faire un clicl droit/Preview, et changer la couleur des Layer que l'on veut faire apparaitre.
+Pour imprimer, faire une clic droit/Save Colors, puis enfin un clic droit/Run Batch.
+
+I.K. Retour a Capture
+
+A present on dispose d'un typon de notre circuit. On peut aussi disposer du schema de l'implantation des composants si l'on a imprime le Layer des empreintes des composants. Cependant il nous manque un schema structurel correspondant a notre crcuit finalise.
+
+I.K.1. Back Annotate
+
+Cette fonction va reprendre le fichier issus de Layout Plus, et annoter en consequence le schema structurel. On pourra enfin imprimer un schema structurel en accord avec notre circuit imprime.
+
+I.K.2. Bill of material
+
+Pour la commande des composants, cette fonction edite automatiquement une liste contenant la reference des composants utilises, leur nomenclature et leur quantite.
+
+II. Realisation / Etapes de realisation du circuit
+
+II.A. Insolation
+
+L'insolation de la plaque consiste a changer la composition chimique de la resine photo-reactive deposee sur le cuivre. Seules les parties exposees aux UV (Ultra Violet, longueur d'onde <400nm) disparaitront a la revelation. Les parties restantes resisteront a la gravure au perchlorure de fer.
+Le circuit etant double face, il nous faudra insoler les deux faces en meme temps. Pour cela, nous placeront les deux typons correspondant respectivement a chaque face du circuit de chaque cote de celui-ci. Les deux typons seront lies par une chute de circuit imprime, les ecartant de facon appropriee correspondant a l'epaisseur de la plaque de circuit imprime, evitant ainsi le decalage des deux faces.
+Une fois les deux typons assembles, le circuit place en sandwich entre eux sur la vitre de l'insoleuse, placer le film de plastique, refermer le battant. Mettre la pompe a vide en route, et aider a chasser l'air pour faire le vide. De ce fait, le film collera a la vitre, maintenant fermement les typons et la plaque, empechant un mouvement quelconque.
+'Enfourner' et choisir une temporation d'insolation correspondant au type du circuit. Essayer de prendre en compte l'age de la plaque, sachant que plus une plaque est vieille, moins la resine reagit, et plus le temps d'insolation est long (ne pas ajouter plus de 30 secondes, c'est le maximum pour une plaque en limite de peremption).
+
+II.B. Revelation
+
+Une fois l'insolation effectuee, il faut encore eliminer la resine exposee au UV. Il faut donc plonger la plaque dans un bain de revelateur, de preference chauffe au bain-marie a 40-50øC. La resine exposee se dissout, et l'on peut entrapercevoir le trace jaunatre des pistes definitives. Laver la plaque a l'eau chaude pour bloquer l'action du revelateur, afin que celui-ci ne commence pas a entamer la resine non exposee, et detruise le trace des pistes.
+
+II.C. Gravure
+
+La gravure sera effectuee au perchlorure de fer qui va dissoudre le cuivre du circuit. Les pistes protegees par la resine ne seront pas attaquees, a condition de ne pas laisser le circuit trop longtemps dans le perchlorure de fer. En effet, une fois le circuit grave, le cuivre entre le pistes ayant completement disparu, le perchlorure commence a attaquer le cuivre des pistes en passant sur les cotes de leur trace, sous la resine.
+
+II.D. Nettoyage
+
+Nettoyer abondement la plaque a l'eau chaude, et verifier que celle-ci ne presente pas de defauts. Supprimer la resine residuelle grace a un produit approprie
+
+II.E. Etamage
+
+Le cuivre s'oxydant, il faut prevenir cette oxydation. On pose une fine couche d'etain (inoxydable) par auto-electrolyse dans un bain d'etamage a froid. Celui-ci sera mis au prealable dans un bain-marie pour en porter la temperature a 40-50øC afin d'accelerer le processus. Une fois le circuit recouvert d'une couche uniforme, le retirer du bain et le laver a l'eau chaude.
+
+II.F. Percage
+
+Le percage s'effectuera de preference grace a un foret en carbure de tungstene, plus resistant et coupant mieux. Les forets en acier ont tendance a soulever le centre de la pastille, ce qui forme une petite bosse. Il arrive meme que des petites pastilles se fassent ainsi arracher.
+
+II.G. Placement des composants
+
+Avec le schema d'implantation, implanter les composants en commencant par les plus petits (straps, resistances, diodes, ...). Pour les maintenirs sur la plaque, ecarter legerement leurs pattes.
+
+II.H. Soudage
+
+Le soudage s'effectuera de preference avec un fil d'etain assez fin, au flux assez basique (degraissant). Le fer devra etre suffisement chaud. Chauffer au prealable la pastille et la patte du composant a souder, appliquer brievement un peu d'etain, attendre une fraction de seconde que celui-ci s'etale par capilarite, retirer le fer et laisser refroidir. Verifier que la soudure tient.
+
+II.I. Finalisation
+
+La finalisation sera efectuee par une derniere verification des eventuels court-circuits, et par le placement les circuits integres dans leur support. Des mesures de verifications auront etes realisees tout au long de l'implantation des composants, afin de pallier a d'eventuels problemes assez rapidement.
+
+            

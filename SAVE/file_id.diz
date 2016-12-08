@@ -1,0 +1,12 @@
+/// I2C BUS DRIVER IN CPP - KOSS 2000-2001 /////////////////////////////////////
+
+VERSION  : Programmer's Heaven EXSTATIC (modified on 2001/No/23)
+
+CONTENT  : - C++ source of the I2C bus driver for PC
+           - Pictures of the parallel port to I2C bus conversion card (NO SCH !)
+
+LANGUAGE : English
+
+AUTHOR   : KOCH David AKA Kochise (david.koch@libertysurf.fr)
+
+SPECIAL  : Predefined frame based I2C driver (see 'int main(void)')

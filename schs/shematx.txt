@@ -1,0 +1,28 @@
+Schematix Listing
+
+ParaI2C : NOT POSSIBLE WITH MY CODE (ONLY 'DR AND 'SR')
+     PIN POL -> REG BIT POL INF
+RPWR  /
+RSDA 11   0      S   7   0
+RSCL 15   1      S   3   1
+WPWR 12   1      C   5   1
+WSDA 14   0      C   1   0
+WSCL 17   0      C   3   0
+
+Vestel v100/101 : NOT POSSIBLE WITH MY CODE (ONLY 'DR AND 'SR')
+     PIN POL -> REG BIT POL INF
+RPWR 12   1      S   5   1
+RSDA 11   0      S   7   0
+RSCL 15   1      S   3   1
+WPWR  2   0      D   0   1   if 0 FACT pin connected to GND
+WSDA  9   0      D   7   1
+WSCL 17   0      C   3   0
+
+Vestel v200/v201 :
+     PIN POL -> REG BIT POL INF
+RPWR 10  1       S   6   1
+RSDA 13  0       S   4   1
+RSCL 12  1       S   5   1
+WPWR  2  0       D   0   1   if 0 FACT pin connected to GND
+WSDA  3  0       D   1   1
+WSCL  4  0       D   2   1
