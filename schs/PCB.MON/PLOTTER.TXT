@@ -1,0 +1,17 @@
+Plottertreiber:
+
+- Die Form der L”taugen werden nur optimiert, wenn die folgenden Bedingungen
+  erfllt sind: optimieren invertiert, Stiftnummer fr die zweite Seite
+  Null.
+
+- Die Plotterbefehle k”nnen frei vorgegeben werden, dabei sind die
+  folgenden Besonderheiter zu beachten:
+  - Wird kein Befehl eingegeben wird er auch nicht benutzt (Stiftwechsel,
+    Text und Stift heben oder senken).
+  - Die absolute Stiftpositionierung erfolgt mit gehobenem Stift, die
+    relative Bewegung erfolgt mit gesenktem Stift. Dadurch wird nicht unbe-
+    dingt ein Plotter ben”tigt, der Befehle fr das Stift heben und senken
+    besitzt.
+    
+
+Thomas Praefcke

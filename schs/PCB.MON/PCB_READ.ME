@@ -1,0 +1,136 @@
+Informationen zum Plottertreiber finden Sie im File PLOTTER.TXT
+
+Neue Funktion bei Version 1.12:
+
+- Wenn beim Verschieben von Leiterbahnen, die Shift-Taste gedrckt wird,
+  stellt das Programm die unterbrochenen Verbindungen wieder her. (Diese
+  Funktion arbeitet zur Zeit nur auf einer Platinenseite und wird demn„chst
+  noch verbessert.)
+- Spiegeln und drehen des Pufferbereiches.
+- Besserer Plottertreiber.
+- Neuer Modus frs Leiterbahnlegen.
+- Platinen k”nnen als GEM-Image gespeichert werden.
+- Die 'Begradigen'-Funktion fgt an den Rand von dicken diagonalen
+  Leiterbahnen Keile.
+- Der gewnschte Drucker mu jetzt mit dem Menpunkt Programm-
+  konfiguration ausgew„hlt werden.
+- Die Plot- und Druckkonfiguration kann auf der Diskette gespeichert
+  werden (PCB.INF).
+- Die Plotterbefehle k”nnen jetzt vom Benutzer festgelegt werden (Siehe
+  PLOTTER.DOC).
+
+INFORMATIONEN ZUR VERSION 1.14b
+
+- Dies ist die erste Version, die mit dem Turbo-C-Compiler erstellt wurde.
+  Ich hoffe, da alle Fehler, die sich durch die Umstellung ergegeben haben,
+  in dieser Version beseitigt sind.
+  Durch den neuen Compiler ist der Programmcode um ber 30% krzer geworden.
+
+- Diese Version enth„lt auch einen Treiber fr den Atari-Laserdrucker. Bitte
+  seien Sie etwas vorsichtig (vor dem Laserdruck den letzte Stand auf 
+  Diskette speichern). In dem Ordner FONTS sind die fr den Ausdruck not-
+  wendigen Zeichens„tze. Es handelt sich um GEM-Fonts. Der Treiber
+  funktioniert nur fehlerfrei wenn der BLITTER eingeschaltet ist. Die Anzahl
+  der Kopien kann in der Dialogbox vorgegeben werden.
+
+- Diese Version enth„lt einen vollst„ndig neuen Treiber fr die 24-Nadel-
+  Drucker, der GEM-Fonts verwendet und wesentlich schneller arbeitet. Die
+  fr den Ausdruck verwendeten Fonts befinden sich im FONTS-Ordner. Fr 1:1
+  PCB_0909.FNT und fr 2:1 PCB_1818.FNT. Ein optimierter Ausdruck ist jetzt
+  auch im 1:1 Modus m”glich. Wenn der Ausdruck Fehlerhaft ist, sollte im
+  Druckerkonfigurationmen die Verwendung der HTABS deaktiviert werden.
+
+- Jetzt werden im INF-File auch noch folgende Parameter gespeichert:
+  Bildschirmdarstellung, Anzahl der Wierderholungen beim Qualit„tsdruck,
+  Plotgeschwindigkeit und Plot-Zoom.
+
+INFORMATIONEN ZUR VERSION 1.15:
+Das Beschriften der Platine ist m”glich. Allerdings ist zur Zeit noch kein
+Ausdruck auf den 9-Nadel-Druckern m”glich. Beim Plotten wird die Strichst„rke
+noch nicht bercksichtigt.
+
+INFORMATIONEN ZUR VERSION 1.17:
+- Der HP-Laserjet kann die Daten jetzt auch ber die serielle Schnittstelle
+  ausgeben.
+- Die UNDO-Funktion funktoniert nun auch beim Text.
+- Die Anzeige der Position l„t sich jetzt auch auf 'mm' umschalten; auer-
+  dem l„t sich die Position durch zwei teilen, diese M”glichkeit verein-
+  facht die Erstellung von SMD-Platinen, wenn der 2:1-Ausdruck auf ein Viertel
+  verkleinert wird.
+- Wenn beim Aufruf der Druck- oder Plotterausgabe die Shifttaste gedrckt
+  gehalten wird erscheint zuerst die Konfigurationsdialogbox.
+- Der Betriebsmodus (Iconenleiste) l„t sich jetzt auch direkt ber die
+  Tastatur ver„ndern.
+  
+INFORMATIONEN ZUR VERSION 1.18:
+- Die GEM-Image-Ausgabe erfolgt jetzt komplett (alle Punktdichten und mit
+  Text).
+- Der Druckertreiber fr den NEC-P2 und P3 befindet sich jetzt im Programm.
+- Der falsche Bildschirmaufbau nach Benutzung der šbersichtsbox ist be-
+  richtigt.
+- Der Routmodus wird jetzt nach dem Programmstart immer richtig angezeigt.
+- Die Anzeige des DIP 64 Sockels mte jetzt richtig sein.
+- Der 24 Nadeldruckertreiber druckt die Platinen jetzt ber die ganze
+  Breite. Allerdings darf beim NEC-P7 die maximale Platinenh”he nur 170 mm
+  betragen (135 Raster) wenn im Mastab 2:1 gedruckt werden soll, denn die
+  Platine wird bei der Ausgabe gedreht und die maximale Breite des Druckers
+  betr„gt nur 340mm.
+
+INFORMATIONEN ZUR VERSION 1.19:
+
+- Bei der Platinenausgabe wurde der Text ge„ndert: Aus Ausgabesicht: 'von
+  L”tseite/von Bestckungsseite' wurde jetzt 'spiegeln/ nicht spiegeln'. Die
+  Funktion ist gleich geblieben.
+
+- Wenn im Editieren-Men der Modus 'sel-Alles' angew„hlt ist, wird jetzt
+  beim Verschieben von Platinenbereichen auch der Text verschoben.
+
+- Bei der Image-Ausgabe lassen sich die Daten auch als unkomprimiertes File
+  speicher (BIT-Map). Die Datei hat das folgende Format: 1. Wort->Breite in
+  Pixeln (zur Zeit ist dieser Wert immer ein Vielfaches von 16), 2. Wort->An-
+  zahl der Zeilen, danach folgen die Grafikdaten.
+  Beispiel: 00 20 00 08 ff ff... : 32 Punkte breit, 8 Zeilen, das Bild f„ngt
+  oben links mit einer Linie an.
+
+- Das Programm h„ngt jetzt nicht mehr, wenn eine PD-Fileselektorbox ver-
+  wendet wird.
+
+- Die Plotterausgabe kann jetzt im Mastab 1:0,5 bis 1:4 erfolgen.
+
+- Der Plottertreiber bercksichtigt jetzt die Stiftbreite und die Vorgabe
+  der Leiterbahnbreite. Die entsprechende Dialogbox finden Sie in der Pro-
+  grammkonfiguration oder wenn beim Aufrufen der Plotterausgabebox die linke
+  Shift-Taste gedrckt gehalten wird.
+  
+       EKKKKKKKKK/
+       K        /   Es kann jetzt auch die Gr”e der dreieckigen Keile
+       K      /     modifiziert werden: dx und dy geben die Entfernung
+       K    /M      von M zu E an; Der Rand entspricht der L„nge von K.
+       K  /
+       K/
+
+- Im Puffer k”nnen jetzt beliebig groe Platinenausschnitte zwischenge-
+  speichert werden, wenn genug Speicher zur Verfgung steht.
+
+Folgende M”glichkeiten bestehen (noch) nicht:
+
+- Die Schrift wird nur mit der Stiftbreite geplottet.
+
+- Auf den 9-Nadel-Drucker werden nur die Leiterbahnen und keine Platinen-
+  beschriftung ausgegeben.
+
+- Im Puffer werden nur Leiterbahnen und keine Texte gepuffert.
+
+
+Falls Sie irgendwelche Fehler finden oder Verbesserungsvorschl„ge haben,
+teilen Sie es mir bitte mit, denn PCB-layout wird st„ndig weiter entwickelt.
+
+Bei g”eren nderungen werden registrierte Benutzer automatisch informiert.
+
+Sie k”nnen  jederzeit die aktuelle Programmversion erhalten, wenn Sie 
+mir 10,- DM schicken.
+
+
+Mit freundlichen Gren
+
+Thomas Praefcke

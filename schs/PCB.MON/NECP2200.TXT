@@ -1,0 +1,9 @@
+Laut Auskunft von NEC gibt es EINE Lieferung von Druckern, die nicht
+einwandfrei am Atari funktionieren.
+
+Problem:  Beim Ausdruck von Grafiken mit 24 Nadeln werden zeitweise
+          die unteren und oberen acht Punkte vertauscht.
+
+Ursache:	Falsches Timing des Strobesignals.
+
+L”sung:   Drucker tauschen, oder ein Spezialkabel verwenden.
